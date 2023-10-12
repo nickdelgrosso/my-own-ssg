@@ -4,10 +4,8 @@ from yaml import load, CLoader
 from jinja2 import Environment, PackageLoader, select_autoescape
 from markdown import markdown
 
-env = Environment(
-    loader=PackageLoader("app"),
-    autoescape=select_autoescape()
-)
+config = load(Path("config.yml").read_text(), CLoader)
+env = Environment(loader=PackageLoader(config['template']), autoescape=select_autoescape())
 
 makedirs('rendered', exist_ok=True)
 
