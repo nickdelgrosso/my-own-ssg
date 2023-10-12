@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<head>
+    <title>The Title</title>
+</head>
+<body>
+    <h2>Pages:</h2>
+    <ul>
+    {% for path in paths %}
+    <li><a href="{{ path }}">{{ path }}</a></li>
+    {% endfor %}
+    </ul>
+</body>
