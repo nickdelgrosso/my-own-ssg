@@ -9,11 +9,12 @@ env = Environment(loader=PackageLoader(config['template']), autoescape=select_au
 
 makedirs('rendered', exist_ok=True)
 
-for template_path in Path('app/templates').glob('*.html'):
+for template_path in Path(f'{config["template"]}/templates').glob('*.html'):
     stem = template_path.stem
     template = env.get_template(template_path.name)
 
-    content_paths = Path('.').glob(f'{stem}/*.md') if Path(stem).is_dir() else [Path(f"{stem}.md")]
+    base = Path('content')
+    content_paths = paths if (paths := list(base.glob(f'{stem}/*.md'))) else [base.joinpath(f"{stem}.md")]
     
     for path in content_paths:
         head, body = path.read_text().split('---')
