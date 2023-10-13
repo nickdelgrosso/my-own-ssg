@@ -3,6 +3,8 @@ pages:
     label: the first
   - id: bb
     label: the second
+  - id: cc
+    label: the third (cc)
 
 ---
 
