@@ -10,3 +10,4 @@ In your python virtual environmnet (I'm using Python 3.11), install the dependen
 
   1. In the `config.yml` file, Set the name of the theme you want to use (the theme must be in the `themes` folder).
   2. Run the `main.py` file.
+  3. the rendered webpages will appear in the `rendered/` directory.
