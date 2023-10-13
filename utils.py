@@ -4,19 +4,20 @@ import yaml
 from jinja2 import Template
 from markdown import markdown
 from pathlib import Path
-from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 from tqdm import tqdm
 
+# FileSystemLoader()
 
 def load_config(path: str) -> dict[str, Any]:
     return yaml.load(Path(path).read_text(), yaml.CLoader)
 
 
 def render_theme(theme_path: str, content_path: str) -> Iterable[tuple[Path, str]]:
-    _theme_path = Path(theme_path)
+    templates_path = Path(theme_path) / 'templates'
     _content_path = Path(content_path)
-    env = Environment(loader=PackageLoader(_theme_path.name), autoescape=select_autoescape())
-    for template_path in (Path(_theme_path) / 'templates').glob('*.html'):
+    env = Environment(loader=FileSystemLoader(templates_path), autoescape=select_autoescape())
+    for template_path in templates_path.glob('*.html'):
         stem = template_path.stem
         template = env.get_template(template_path.name)
         content_paths = paths if (paths := list(_content_path.glob(f'{stem}/*'))) else [_content_path.joinpath(f"{stem}.md")]

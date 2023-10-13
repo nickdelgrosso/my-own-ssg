@@ -1,1 +1,3 @@
 rendered
+*.pyc
+__pycache__
