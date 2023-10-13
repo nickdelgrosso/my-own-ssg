@@ -1,3 +1,4 @@
 markdown
 PyYAML
 jinja2
+tqdm
